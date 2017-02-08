@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>MoCA (Model of Coordinated Action) | Redefining the Field of Computer Supported Cooperative Work</title>
+	<link rel="shortcut icon" type="image/png" href="assets/favicon.png"/>
+	<script type='text/javascript' src='http://dataluna.com/jquery-1.10.1.js'></script>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js" data-semver="2.0.3" data-require="jquery"></script>
+    <script data-semver="1.2.13" src="http://code.angularjs.org/1.2.13/angular.js" data-require="angular.js@1.2.x"></script>
+    <script src="/TEST/app.js"></script>
+    <script src="/TEST/resizer.js"></script>
+    
+
+  	<style type='text/css'>
+body {
+    font-size: 10px;
+    font-family: Helvetica, Arial;
+    background-color: #fff;
+    background-image: url("assets/absurdidad.png");
+}
+h1 {
+    font-size: 20px;
+    text-align: center;
+}
+h1 a {
+    font-size: 20px;
+    text-align: center;
+    color:#000;
+    text-decoration: none;
+}
+h2 {
+    font-size: 18px;
+    text-align: center;
+}
+h3 {
+	font-size: 10px;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 5px 0px 5px;
+	text-transform: uppercase;
+	clear:none;
+	display:inline-block;
+}
+p {
+	line-height: 16px;
+	font-size: 10px;
+	font-weight: 300;
+	margin: 0px 0px 0px;
+	padding: 5px 5px 5px 5px; 
+}
+#paper {
+    border: 1px solid #333;
+}
+#leftCol {
+    position: fixed;
+    width: 15%;
+    background-color: #DDD;
+    background-color: #e3e1e5;
+    font-size: 9px;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
+    left: 0px;
+    padding-top: 10px;
+    border-right:1px solid #bfbfbf;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+    font: 200 9px/1.5 Helvetica, Verdana, sans-serif;
+    border-bottom: 1px solid #bfbfbf;
+}
+li:last-child {
+    border: none;
+}
+li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 6px 15px 6px 15px;
+    -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+    -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+    -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+    -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+    transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+li a:hover {
+    font-size: 9px;
+    background: #fefefe;
+}
+#pdf {
+    position: fixed;
+    width: 40%;
+    background-color: #DDD;
+    font-size: 9px;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
+    right: 0px;
+}
+.non-floater {
+    overflow: hidden;
+}
+iframe {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    height: 100%;
+}
+#content {
+    position: relative;
+    margin-left: 16%;
+    width: 43%;
+	width:100%;
+    border: 1px solid red;
+}
+.box {
+    min-height: 2px;
+    border: 1px solid #eee;
+    border: 1px solid #ddd;
+    padding: 15px 12px 15px 15px;
+    padding: 3%;
+    margin-top:5px;
+    background-color:#fff;
+}
+.fullwidth {
+	width:93%;
+}
+.left {
+    float: left;
+    width: 49.5%;
+}
+.right {
+    float: right;
+    width: 49.5%;
+}
+.leftside {
+	float: left;
+}
+.rightside {
+	float:right;
+}
+form {
+  text-align: center;
+}
+</style>
+    <link href="style.css" rel="stylesheet" />
+
+
+<script type="text/javascript"> var url = window.location.href; </script>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+	function initialize() {
+		var mapProp = {
+    	center:new google.maps.LatLng(51.508742,-0.120850),
+    	zoom:2,
+    	mapTypeId:google.maps.MapTypeId.ROADMAP
+		};
+  		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+	}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+	
+</head>
+<body ng-controller="MainCtrl">
+		<div id="leftCol" class="nav">
+			<h1><a href="http://uw-moca.appspot.com/">MoCA</a></h1>
+			<ul id="menu">
+ 				
+					<li><a href="/paper?pgNum={{paper.pgNum}}">{{paper.title}}</a></li>
+				
+			</ul>
+		</div>
+		
+<div class="main">
+<div id="content">
+
+
+
+
+
+
+<div id="sidebar">
+
+<div style='clear:both; width:100%; display:block; border:1px solid blue; height: 10px;'></div>
+		<h1>{{paper.title}}</h1> 
+      	<div class='left box' style='width: 61.7%; padding:1.5%;'><p><strong>AUTHOR: </strong> {{paper.author}}</br><strong>INSTITUTION: </strong> {{paper.institution}} </p> </div>
+      	<div class='right box' style='width: 30.5%; padding:1.5%;'><p><strong>SESSION: </strong> {{paper.session}}</br><strong>PAGE NUMBER: </strong> {{paper.pgNum}}   {{ list1 }}</p></div>
+            <div class='left box' style='width: 95%; padding:2%;'>
+	        	<form action='/sendemail' name='{{ paper.pgNum }}email' id='{{ paper.pgNum }}email' method='post'>
+					<td><label for='{{ paper.pgNum }}to'>Send link for approval: </label></td>
+	            	<td><input type='text' id='{{ paper.pgNum }}to' name='to' placeholder='email address' /></td>
+	            	<input type='hidden' id='{{ paper.pgNum }}pgN' value='{{ paper.pgNum }}' name='pgN' />
+					<input type='submit'>
+					<div id='{{ paper.pgNum }}formmessage'></div>
+				</form>		
+			</div>
+            <div class='left box' style='width: 96.5%; padding:1.5%; clear:both;'><h3>Coordinated Action:</h3> <p><strong>({{paper.CA}}): </strong> {{paper.coordinated_action}}</p></div>
+			<div class='left'>
+			<div class='fullwidth box'><h3>Synchronicity:</h3><p>{{paper.synchronicity}}</p></div>
+            </div>
+            <div class='right'>
+	        <div class='fullwidth box'><h3>Scale:</h3><p>{{paper.scale}}</p> </div>
+	        <div class='fullwidth box'><h3>NCoP:</h3><p>{{paper.number_of_communities_of_practice}}</p></div>
+            </div>
+            
+            <div class='left box' style='width: 96.5%; padding:1.5% 1.5% 0px 1.5%;'>
+            <h3>Physical Distribution:</h3><p>{{paper.physical_distribution}}</br>
+            <div id='map_canvas' style='width:100%; height:200px'></div></p>
+            </div>
+          
+            <div class='left'>
+	        <div class='fullwidth box'><h3>Nascence 1:</h3><p>{{paper.nascence_one}}</p></div>
+	        <div class='fullwidth box'><h3>Planned Permanence:</h3><p>{{paper.planned_permanence}}</p></div>
+	        </div>
+            <div class='right'>
+            <div class='fullwidth box'><h3>Nascence 2:</h3><p>{{paper.nascence_two}}</p></div>
+	        <div class='fullwidth box'><h3>Turnover:</h3><p>{{paper.turnover}}</p></div>
+            <div style='clear:both; width:100%; display:block; border:1px solid red; height: 100px;'></div>
+            </div>
+            
+</div>
+              	
+<div id="pdfcontent">
+				<div class='non-floater' id='pdf'><iframe id='frame' src='http://www.dataluna.com/moca-papers/1467.pdf#view=FitH'></iframe></div>
+</div>
+
+<div id="sidebar-resizer" 
+                resizer="vertical" 
+                resizer-width="6" 
+                resizer-left="#sidebar" 
+                resizer-right="#pdfcontent">
+</div>
+        
+        
+        
+          
+    
+</div>  
+</div>
+
+    
+    
+	</body>
+</html>
